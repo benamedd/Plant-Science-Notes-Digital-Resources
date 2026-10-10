@@ -1,498 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plant Science Notes – Plant virology,  & data analysis services</title>
+<meta name="description" content="Independent plant scientist offering plant disease diagnostics, viral metagenomics, epidemiological modelling, statistical analysis, scientific writing and training.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Hanken+Grotesk:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0b1613; --night2:#13241f; --glow:#7be0b0; --ink:#12201b; --muted:#56655e;
+  --line:#d9e2dd; --bg:#f3f6f4; --white:#fff; --leaf:#1d7a52; --leaf-d:#145a3c; --dapi:#3b4fc9;
+  --serif:"Fraunces",Georgia,serif; --sans:"Hanken Grotesk",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font:400 1rem/1.65 var(--sans);color:var(--ink);background:var(--white);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--dapi);outline-offset:2px}
+.wrap{width:min(1120px,calc(100% - 40px));margin:0 auto}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1;letter-spacing:-.02em}
+.mono{font-family:var(--mono)}
 
-    <title>Plant Science Notes – Digital Resources</title>
-    <meta name="description" content="Plant Science Notes – a personal collection of scientific notes, publications, glossaries, digital tools and resources in plant pathology, plant virology, microbiology and bioinformatics.">
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(11,22,19,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.bar{display:flex;align-items:center;justify-content:space-between;min-height:64px;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#e8f3ed;font-family:var(--serif);font-size:1.15rem}
+.brand i{width:30px;height:30px;border-radius:50%;border:1px solid var(--glow);display:grid;place-items:center;font:500 .62rem var(--mono);color:var(--glow);font-style:normal}
+nav{display:flex;gap:4px;align-items:center}
+nav a{color:#a9bdb4;text-decoration:none;font-size:.88rem;padding:7px 10px;border-radius:6px}
+nav a:hover{color:#fff;background:rgba(255,255,255,.07)}
+nav a.cta{background:var(--glow);color:#08150f;font-weight:600;margin-left:6px}
+nav a.cta:hover{background:#a2f0c9}
+.burger{display:none;background:none;border:0;color:#e8f3ed;font-size:1.6rem;cursor:pointer;padding:4px 8px}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+/* hero */
+.hero{background:var(--night);color:#e8f3ed;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:30px;min-height:620px}
+.hero h1{font-size:clamp(2.6rem,5.6vw,4.6rem);margin-bottom:24px;font-weight:400}
+.hero p.lead{color:#a9bdb4;max-width:540px;font-size:1.08rem;margin-bottom:30px}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;padding:12px 20px;border-radius:8px;font-weight:600;font-size:.92rem;text-decoration:none;border:1px solid transparent;cursor:pointer;font-family:inherit}
+.btn.p{background:var(--glow);color:#08150f}.btn.p:hover{background:#a2f0c9}
+.btn.g{border-color:rgba(255,255,255,.25);color:#e8f3ed}.btn.g:hover{border-color:var(--glow);color:var(--glow)}
+.virion{position:relative;height:100%;min-height:420px}
+#virion{width:100%;height:100%;position:absolute;inset:0;cursor:grab}
+.reads{font:400 .7rem/1.5 var(--mono);color:rgba(123,224,176,.55);position:absolute;left:0;right:0;bottom:18px;text-align:center;overflow:hidden;white-space:nowrap;pointer-events:none}
+.stats{display:flex;gap:34px;margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);flex-wrap:wrap}
+.stats b{display:block;font:500 .95rem var(--mono);color:var(--glow)}
+.stats span{font-size:.8rem;color:#8fa59b}
 
-    <link rel="stylesheet" href="style.css">
+/* sections */
+section{padding:92px 0}
+.soft{background:var(--bg)}
+.head{max-width:680px;margin-bottom:46px}
+.head h2{font-size:clamp(1.9rem,3.6vw,2.8rem);margin-bottom:14px}
+.head p{color:var(--muted)}
+.tag{font:500 .76rem var(--mono);color:var(--leaf);margin-bottom:12px;display:block}
 
-    <style>
-        /* Contact form */
-        .contact-form-box {
-            background: #fff;
-            border: 1px solid var(--line);
-            border-radius: var(--radius-lg);
-            padding: 28px;
-        }
-        .contact-form-box h3 {
-            margin-bottom: 20px;
-            font-family: "DM Serif Display", Georgia, serif;
-            font-size: 1.55rem;
-            font-weight: 400;
-        }
-        .form-group { margin-bottom: 16px; }
-        .form-group label {
-            display: block;
-            margin-bottom: 6px;
-            color: var(--muted);
-            font-size: 0.78rem;
-            font-weight: 500;
-        }
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 11px 13px;
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            background: var(--paper-soft);
-            color: var(--ink);
-            font: inherit;
-            font-size: 0.86rem;
-        }
-        .form-group textarea { min-height: 125px; resize: vertical; }
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--green);
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(57,119,101,0.08);
-        }
-        .btn-submit {
-            width: 100%;
-            border: 0;
-            border-radius: 8px;
-            padding: 12px 18px;
-            background: var(--green-dark);
-            color: #fff;
-            font: inherit;
-            font-size: 0.86rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background .2s ease, transform .15s ease;
-        }
-        .btn-submit:hover { background: var(--green); transform: translateY(-1px); }
-        .form-note {
-            margin-top: 10px;
-            color: var(--soft);
-            font-size: 0.7rem;
-            line-height: 1.5;
-        }
-        @media (max-width: 980px) {
-            .contact-inner { grid-template-columns: 1fr; gap: 35px; }
-        }
-    </style>
+/* services list */
+.svc{border-top:1px solid var(--line)}
+.row{display:grid;grid-template-columns:260px 1fr 220px;gap:30px;padding:28px 0;border-bottom:1px solid var(--line);align-items:start}
+.row h3{font-size:1.5rem}
+.row p{color:var(--muted);max-width:560px}
+.row ul{list-style:none;font:400 .76rem/1.9 var(--mono);color:var(--leaf-d)}
+.row:hover h3{color:var(--leaf)}
+
+/* epi lab */
+.lab{display:grid;grid-template-columns:300px 1fr;gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+.ctrl{padding:28px;background:var(--bg);border-right:1px solid var(--line)}
+.ctrl label{display:block;font-size:.82rem;font-weight:600;margin:18px 0 6px}
+.ctrl label:first-child{margin-top:0}
+.ctrl select,.ctrl input[type=range]{width:100%}
+.ctrl select{padding:9px;border:1px solid var(--line);border-radius:8px;font:inherit;background:#fff}
+.ctrl input[type=range]{accent-color:var(--leaf)}
+.out{margin-top:24px;font:400 .8rem/1.8 var(--mono);color:var(--muted)}
+.out b{color:var(--ink);font-weight:500}
+.plot{padding:20px}
+#epi{width:100%;height:auto;display:block}
+
+/* pipeline */
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:s}
+.step{position:relative;padding:22px 18px 0 0;border-top:2px solid var(--leaf)}
+.step::before{content:"";position:absolute;top:-6px;left:0;width:10px;height:10px;border-radius:50%;background:var(--leaf)}
+.step h3{font:600 1rem var(--sans);letter-spacing:0;margin-bottom:6px}
+.step p{font-size:.85rem;color:var(--muted)}
+.step small{display:block;margin-top:8px;font:400 .72rem var(--mono);color:var(--dapi)}
+
+/* tools + pubs */
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{border:1px solid var(--line);border-radius:12px;padding:26px;background:#fff;display:flex;flex-direction:column}
+.card h3{font-size:1.45rem;margin:10px 0}
+.card p{color:var(--muted);font-size:.92rem}
+.card .pill{align-self:flex-start;font:500 .7rem var(--mono);padding:4px 9px;border-radius:5px;background:#e6f2ec;color:var(--leaf-d)}
+.card .pill.b{background:#e9ecfb;color:var(--dapi)}
+.card a.l{margin-top:auto;padding-top:18px;color:var(--leaf);font-weight:600;font-size:.88rem;text-decoration:none}
+.card a.l:hover{text-decoration:underline}
+
+/* contact */
+.contact{background:var(--night);color:#e8f3ed}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.contact h2{font-size:clamp(1.9rem,3.6vw,2.8rem);margin-bottom:16px}
+.contact p{color:#a9bdb4}
+.contact .tag{color:var(--glow)}
+form{background:#fff;color:var(--ink);padding:30px;border-radius:14px}
+.fg{margin-bottom:15px}
+.fg label{display:block;font-size:.8rem;font-weight:600;margin-bottom:5px;color:var(--muted)}
+.fg input,.fg select,.fg textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:.92rem;background:var(--bg)}
+.fg textarea{min-height:130px;resize:vertical}
+.fg input:focus,.fg select:focus,.fg textarea:focus{background:#fff;border-color:var(--leaf)}
+.send{width:100%;padding:13px;border:0;border-radius:8px;background:var(--leaf-d);color:#fff;font:600 .95rem var(--sans);cursor:pointer}
+.send:hover{background:var(--leaf)}
+.send:disabled{opacity:.6;cursor:wait}
+#status{margin-top:12px;font-size:.88rem;min-height:1.4em}
+#status.ok{color:var(--leaf-d)}#status.err{color:#b3261e}
+.hp{position:absolute;left:-9999px}
+footer{background:#08100d;color:#7d9188;padding:34px 0;font-size:.82rem}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* responsive */
+@media(max-width:980px){
+  .hero .wrap{grid-template-columns:1fr;min-height:auto}
+  .virion{min-height:320px;order:-1}
+  .row{grid-template-columns:1fr;gap:10px}
+  .lab,.contact .wrap{grid-template-columns:1fr}
+  .ctrl{border-right:0;border-bottom:1px solid var(--line)}
+  .pipe{grid-template-columns:1fr 1fr;gap:28px 20px}
+  .cols{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .burger{display:block}
+  nav{display:none;position:absolute;top:64px;left:0;right:0;background:var(--night);flex-direction:column;align-items:stretch;padding:12px 20px 18px;border-bottom:1px solid rgba(255,255,255,.1)}
+  nav.open{display:flex}
+  nav a{padding:12px 8px}
+  nav a.cta{margin:6px 0 0;text-align:center}
+  section{padding:68px 0}
+  .pipe{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
-
 <body>
 
-<header id="top">
-    <div class="container nav-inner">
-        <a href="#top" class="logo" aria-label="Plant Science Notes home">
-            <span class="logo-mark" aria-hidden="true">PS</span>
-            <span class="logo-text"><strong>Plant Science</strong> Notes</span>
-        </a>
-
-        <nav class="main-nav" aria-label="Main navigation">
-            <a href="#about">About</a>
-            <a href="#publications">Publications</a>
-            <a href="#tools">Digital Tools</a>
-            <a href="#analyses">Data & Analysis</a>
-            <a href="#bioinformatics">Bioinformatics</a>
-            <a href="#resources">Resources</a>
-            <a href="#contact" class="btn-nav">Contact</a>
-        </nav>
-
-        <button class="burger" aria-label="Open menu"
-                onclick="document.querySelector('.main-nav').classList.toggle('open')">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Plant Science Notes, home"><i>PS</i>Plant Science Notes</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav id="nav" aria-label="Main">
+      <a href="#services">Services</a>
+      <a href="#lab">Epidemic lab</a>
+      <a href="#method">Method</a>
+      <a href="#tools">Tools</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact" class="cta">Request a project</a>
+    </nav>
+  </div>
 </header>
 
-<main>
+<main id="top">
 
-<!-- HERO -->
-<section class="hero" id="about">
-    <div class="hero-grid"></div>
-
-    <div class="container hero-inner">
-        <div class="hero-copy">
-            <p class="eyebrow">Plant health · Scientific resources</p>
-
-            <h1>
-                Plant Science<br>
-                <em>Notes & Digital Resources</em>
-            </h1>
-
-            <p class="hero-lead">
-                A personal collection of scientific notes, publications, glossaries,
-                digital tools and practical resources developed from experience in
-                plant pathology, plant virology, microbiology and bioinformatics.
-            </p>
-
-            <div class="hero-actions">
-                <a href="#publications" class="btn-primary">Explore the resources</a>
-                <a href="#about-note" class="btn-ghost">About this website</a>
-            </div>
-
-            <div class="hero-tags" aria-label="Main areas">
-                <span>Plant Pathology</span>
-                <span>Plant Virology</span>
-                <span>Microbiology</span>
-                <span>Bioinformatics</span>
-            </div>
-        </div>
-
-        <div class="hero-note" aria-hidden="true">
-            <div class="note-card">
-                <span class="note-label">Scientific notes</span>
-                <div class="note-line long"></div>
-                <div class="note-line medium"></div>
-                <div class="note-line short"></div>
-                <div class="note-divider"></div>
-                <span class="note-topic">Plant health · Virology · Data</span>
-            </div>
-        </div>
+<section class="hero" style="padding:0">
+  <div class="wrap">
+    <div>
+      <span class="tag mono" style="color:var(--glow)">Plant pathology · virology · metagenomics</span>
+      <h2>Plant Science Notes&Digital Resources.</h2>
+      <p class="lead">A personal collection of scientific notes, publications, glossaries, digital tools and practical resources developed from experience in plant pathology, plant virology, microbiology and metagenomics.</p>
+      <div class="btns">
+        <a class="btn p" href="#contact">Discuss your project</a>
+        <a class="btn g" href="#services">See the services</a>
+      </div>
+      <div class="stats">
+        <div><b>Plant virology</b><span>detection and discovery</span></div>
+        <div><b>NGS</b><span>from reads to genomes</span></div>
+        <div><b>R · Python</b><span>reproducible analysis</span></div>
+      </div>
     </div>
+    <div class="virion">
+      <canvas id="virion" aria-label="Rotating icosahedral virus particle, drag to rotate" role="img"></canvas>
+      <div class="reads" id="reads" aria-hidden="true"></div>
+    </div>
+  </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section-pad" id="about-note">
-    <div class="container narrow">
-        <p class="section-kicker">About</p>
-        <h2 class="section-title">A personal space for sharing scientific knowledge</h2>
-        <p class="section-sub">
-            Plant Science Notes brings together material developed from academic teaching,
-            research experience and continuing independent scientific work. The aim is
-            simple: to make useful knowledge, practical methods and scientific resources
-            easier to consult and share.
-        </p>
-
-        <div class="about-grid">
-            <div>
-                <h3>From plant health to digital science</h3>
-                <p>
-                    The resources cover plant pathology, plant virology, microbiology,
-                    disease epidemiology, molecular methods, bioinformatics, sequencing
-                    and plant viral metagenomics.
-                </p>
-            </div>
-            <div>
-                <h3>For learning and reference</h3>
-                <p>
-                    The site is intended for students, researchers, diagnosticians and
-                    anyone interested in plant health. It is a personal scientific
-                    resource site, not a university laboratory or institutional research centre.
-                </p>
-            </div>
-        </div>
+<section id="services">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag mono">Services</span>
+      <h2>What I can do for your project</h2>
+      <p>Each engagement starts with a short scoping call and ends with a written report you can reuse, cite or hand to a reviewer.</p>
     </div>
+    <div class="svc">
+      <div class="row">
+        <h3>Plant disease diagnostics</h3>
+        <p>Symptom interpretation, choice of detection strategy (serology, PCR, sequencing) and review of results for virus, bacterial and fungal problems.</p>
+        <ul><li>Diagnostic strategy</li><li>Result interpretation</li><li>Field assessment advice</li></ul>
+      </div>
+      <div class="row">
+        <h3>Viral metagenomics</h3>
+        <p>Analysis of sequencing data for virus discovery and characterisation: quality control, assembly, taxonomic assignment and annotation.</p>
+        <ul><li>QC and assembly</li><li>Virus identification</li><li>Phylogeny and recombination</li></ul>
+      </div>
+      <div class="row">
+        <h3>Epidemiology and statistics</h3>
+        <p>Disease progress curves, AUDPC, model fitting, ANOVA, regression and multivariate analysis, with figures ready for publication.</p>
+        <ul><li>Epidemic models</li><li>PCA and clustering</li><li>R, Python, SPSS</li></ul>
+      </div>
+      <div class="row">
+        <h3>Scientific writing and review</h3>
+        <p>Manuscript editing, methods sections, glossaries and technical documentation for plant science, written for clarity and accuracy.</p>
+        <ul><li>Manuscript support</li><li>Glossaries</li><li>Technical documents</li></ul>
+      </div>
+      <div class="row">
+        <h3>Training and teaching</h3>
+        <p>Short courses and one-to-one coaching for students and technicians in plant virology, molecular methods and data analysis.</p>
+        <ul><li>Workshops</li><li>Student mentoring</li><li>Course material</li></ul>
+      </div>
+      <div class="row">
+        <h3>Custom digital tools</h3>
+        <p>Small applications that turn a repeated measurement or calculation into something your team can use in the field or the lab.</p>
+        <ul><li>Mobile and web tools</li><li>Calculators</li><li>Image-based scoring</li></ul>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- PUBLICATIONS -->
-<section class="section-pad section-soft" id="publications">
-    <div class="container">
-        <p class="section-kicker">Publications</p>
-        <h2 class="section-title">Books, glossaries & scientific writing</h2>
-        <p class="section-sub">
-            Selected publications and reference resources developed in plant pathology,
-            plant virology and molecular biology.
-        </p>
-
-        <div class="resource-grid">
-            <article class="resource-card featured">
-                <span class="resource-type">Glossary</span>
-                <h3>A Comprehensive Glossary of Plant Virology and Virus-Host Interactions</h3>
-                <p>
-                    A reference resource covering terminology used in plant virology,
-                    virus biology and virus–host interactions.
-                </p>
-                <a href="#" class="text-link">View publication →</a>
-            </article>
-
-            <article class="resource-card">
-                <span class="resource-type">Glossary</span>
-                <h3>A Glossary of Plant Virology: Essential Level</h3>
-                <p>
-                    A concise reference designed to help students and readers navigate
-                    essential concepts in plant virology.
-                </p>
-                <a href="#" class="text-link">View publication →</a>
-            </article>
-
-            <article class="resource-card">
-                <span class="resource-type">Reference work</span>
-                <h3>Plant Pathology & Molecular Biology Resources</h3>
-                <p>
-                    Selected terminology and reference material developed through
-                    teaching and scientific writing.
-                </p>
-                <a href="#resources" class="text-link">Explore resources →</a>
-            </article>
-        </div>
+<section id="lab" class="soft">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag mono">Epidemic lab</span>
+      <h2>Compare how a disease can progress</h2>
+      <p>A small demonstration of the models I fit to field data. Change the model and the rate, and watch the curve and the area under it (AUDPC) respond.</p>
     </div>
+    <div class="lab">
+      <div class="ctrl">
+        <label for="model">Model</label>
+        <select id="model">
+          <option value="logistic">Logistic</option>
+          <option value="gompertz">Gompertz</option>
+          <option value="mono">Monomolecular</option>
+        </select>
+        <label for="rate">Apparent infection rate r: <span id="rv">0.12</span> per day</label>
+        <input type="range" id="rate" min="0.03" max="0.4" step="0.01" value="0.12">
+        <label for="y0">Initial disease y₀: <span id="yv">1</span>%</label>
+        <input type="range" id="y0" min="0.5" max="10" step="0.5" value="1">
+        <div class="out" aria-live="polite">AUDPC <b id="audpc">–</b><br>Days to 50% <b id="t50">–</b></div>
+      </div>
+      <div class="plot">
+        <svg id="epi" viewBox="0 0 640 340" role="img" aria-label="Disease progress curve"></svg>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- DIGITAL TOOLS -->
-<section class="section-pad" id="tools">
-    <div class="container">
-        <p class="section-kicker">Digital tools</p>
-        <h2 class="section-title">Small tools for practical scientific work</h2>
-        <p class="section-sub">
-            A selection of applications developed to support plant disease assessment,
-            epidemiological analysis and agricultural calculations.
-        </p>
-
-        <div class="tool-grid">
-            <article class="tool-card">
-                <div class="tool-number">01</div>
-                <h3>LeafDiag</h3>
-                <p>
-                    Image-based assessment of foliar disease severity, with automatic
-                    quantification of visible symptoms.
-                </p>
-                <span class="tech-tag">Android</span>
-            </article>
-
-            <article class="tool-card">
-                <div class="tool-number">02</div>
-                <h3>EpiModel</h3>
-                <p>
-                    Comparison and fitting of plant disease epidemic models, including
-                    logistic, Gompertz and monomolecular models.
-                </p>
-                <span class="tech-tag">Epidemiology</span>
-            </article>
-
-            <article class="tool-card">
-                <div class="tool-number">03</div>
-                <h3>Sprayer Calibrator</h3>
-                <p>
-                    Practical calculations for sprayer calibration, flow rate, dose
-                    and spray volume.
-                </p>
-                <span class="tech-tag">Agricultural tool</span>
-            </article>
-        </div>
+<section id="method">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag mono">Method</span>
+      <h2>How a sequencing project runs</h2>
+      <p>A fixed order, so every result can be traced back to its source.</p>
     </div>
+    <div class="pipe">
+      <div class="step"><h3>Scope</h3><p>Question, samples, what a useful answer looks like.</p><small></small></div>
+      <div class="step"><h3>Quality control</h3><p>Check read quality, trim adapters, remove host sequences.</p><small>FastQC · fastp</small></div>
+      <div class="step"><h3>Assembly</h3><p>Rebuild contigs from short reads and assess completeness.</p><small>SPAdes · MEGAHIT</small></div>
+      <div class="step"><h3>Identification</h3><p>Match contigs to known viruses and microbial taxa.</p><small>BLAST · DIAMOND · Kraken2</small></div>
+      <div class="step"><h3>Interpretation</h3><p>Phylogeny, diversity and a written report with figures.</p><small>report + scripts</small></div>
+    </div>
+  </div>
 </section>
 
-<!-- DATA ANALYSIS -->
-<section class="section-pad dark-section" id="analyses">
-    <div class="container">
-        <p class="section-kicker light">Data & analysis</p>
-        <h2 class="section-title light">Quantitative approaches in plant science</h2>
-        <p class="section-sub light">
-            Notes and examples related to statistical analysis, epidemiology and
-            visualization of biological data.
-        </p>
-
-        <div class="analysis-grid">
-            <div class="analysis-item">
-                <span>01</span>
-                <h3>Classical statistics</h3>
-                <p>ANOVA, tests, regressions, correlations and other common approaches using R, SPSS or Python.</p>
-            </div>
-            <div class="analysis-item">
-                <span>02</span>
-                <h3>Multivariate analysis</h3>
-                <p>PCA, clustering, correspondence analysis and graphical exploration of multidimensional data.</p>
-            </div>
-            <div class="analysis-item">
-                <span>03</span>
-                <h3>Disease epidemiology</h3>
-                <p>AUDPC, epidemic curves and mathematical models used to describe disease progress.</p>
-            </div>
-            <div class="analysis-item">
-                <span>04</span>
-                <h3>Figures & visualization</h3>
-                <p>Clear, reproducible graphical presentation of scientific results for reports and publications.</p>
-            </div>
-        </div>
+<section id="tools" class="soft">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag mono">Digital tools</span>
+      <h2>Tools I have built</h2>
+      <p>Examples of the custom tools I develop for plant health work.</p>
     </div>
+    <div class="cols">
+      <article class="card"><span class="pill">Android</span><h3>LeafDiag</h3><p>Measures foliar disease severity from a photo by quantifying visible symptoms automatically.</p></article>
+      <article class="card"><span class="pill b">Epidemiology</span><h3>EpiModel</h3><p>Fits and compares logistic, Gompertz and monomolecular models on disease progress data.</p></article>
+      <article class="card"><span class="pill">Agriculture</span><h3>Sprayer Calibrator</h3><p>Calculates flow rate, dose and spray volume for accurate sprayer calibration.</p></article>
+    </div>
+  </div>
 </section>
 
-<!-- BIOINFORMATICS -->
-<section class="section-pad" id="bioinformatics">
-    <div class="container">
-        <p class="section-kicker">Bioinformatics</p>
-        <h2 class="section-title">From sequence data to biological interpretation</h2>
-        <p class="section-sub">
-            Practical notes on sequencing, plant viral metagenomics, microbial communities,
-            molecular identification and phylogenetic analysis.
-        </p>
-
-        <div class="workflow">
-            <div class="workflow-step">
-                <span>01</span>
-                <div><strong>Quality control</strong><small>FastQC · fastp</small></div>
-            </div>
-            <div class="workflow-arrow">→</div>
-            <div class="workflow-step">
-                <span>02</span>
-                <div><strong>Assembly</strong><small>SPAdes · MEGAHIT</small></div>
-            </div>
-            <div class="workflow-arrow">→</div>
-            <div class="workflow-step">
-                <span>03</span>
-                <div><strong>Identification</strong><small>BLAST · Kraken2 · DIAMOND</small></div>
-            </div>
-            <div class="workflow-arrow">→</div>
-            <div class="workflow-step">
-                <span>04</span>
-                <div><strong>Interpretation</strong><small>Phylogeny · Viromics</small></div>
-            </div>
-        </div>
-
-        <div class="bio-grid">
-            <article>
-                <span class="resource-type blue">Plant viromics</span>
-                <h3>Viral metagenomics</h3>
-                <p>Plant viral diversity, sequencing workflows, virus discovery and characterization.</p>
-            </article>
-            <article>
-                <span class="resource-type blue">Phylogeny</span>
-                <h3>Molecular evolution</h3>
-                <p>Sequence alignment, phylogenetic reconstruction, recombination and evolutionary analysis.</p>
-            </article>
-            <article>
-                <span class="resource-type blue">Microbial ecology</span>
-                <h3>Community analysis</h3>
-                <p>Profiling and interpretation of bacterial and fungal communities associated with plants and soils.</p>
-            </article>
-            <article>
-                <span class="resource-type blue">Methods</span>
-                <h3>Practical workflows</h3>
-                <p>Notes on tools, quality control, annotation and reproducible analysis of biological sequence data.</p>
-            </article>
-        </div>
+<section id="publications">
+  <div class="wrap">
+    <div class="head">
+      <span class="tag mono">Publications</span>
+      <h2>Reference works</h2>
+      <p>Glossaries and teaching resources written for students and researchers.</p>
     </div>
+    <div class="cols">
+      <article class="card"><span class="pill b">Glossary</span><h3>A Comprehensive Glossary of Plant Virology and Virus-Host Interactions</h3><p>Terminology of plant virology, virus biology and virus–host interactions.</p><a class="l" href="#">View publication</a></article>
+      <article class="card"><span class="pill b">Glossary</span><h3>A Glossary of Plant Virology: Essential Level</h3><p>A concise guide to the essential concepts, designed for students.</p><a class="l" href="#">View publication</a></article>
+      <article class="card"><span class="pill b">Teaching</span><h3>Plant Pathology and Molecular Biology Resources</h3><p>Notes and terminology developed through teaching and scientific writing.</p><a class="l" href="#">Browse resources</a></article>
+    </div>
+  </div>
 </section>
 
-<!-- RESOURCES -->
-<section class="section-pad section-soft" id="resources">
-    <div class="container">
-        <p class="section-kicker">Resources</p>
-        <h2 class="section-title">Notes for students and researchers</h2>
-        <p class="section-sub">
-            Educational material, terminology and practical explanations developed
-            from teaching and scientific experience.
-        </p>
-
-        <div class="resource-list">
-            <a href="#" class="resource-row">
-                <span class="resource-index">01</span>
-                <div>
-                    <strong>Plant pathology</strong>
-                    <span>Concepts, terminology and disease management</span>
-                </div>
-                <b>→</b>
-            </a>
-            <a href="#" class="resource-row">
-                <span class="resource-index">02</span>
-                <div>
-                    <strong>Plant virology</strong>
-                    <span>Virus structure, replication, detection and diversity</span>
-                </div>
-                <b>→</b>
-            </a>
-            <a href="#" class="resource-row">
-                <span class="resource-index">03</span>
-                <div>
-                    <strong>Viromics & metagenomics</strong>
-                    <span>Methods, workflows and bioinformatics terminology</span>
-                </div>
-                <b>→</b>
-            </a>
-            <a href="#" class="resource-row">
-                <span class="resource-index">04</span>
-                <div>
-                    <strong>Scientific notes</strong>
-                    <span>Short explanations of methods and concepts</span>
-                </div>
-                <b>→</b>
-            </a>
-        </div>
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div>
+      <span class="tag mono">Contact</span>
+      <h2>Tell me about your samples, data or question</h2>
+      <p>Describe what you have and what you need to find out. I reply with a clear scope, a timeline and a quote, usually within a few working days.</p>
     </div>
-</section>
-
-<!-- CONTACT -->
-<section class="section-pad contact-section" id="contact">
-    <div class="container contact-inner">
-        <div>
-            <p class="section-kicker">Contact</p>
-            <h2 class="section-title">A question, a scientific resource or a collaboration?</h2>
-            <p class="section-sub">
-                You can use the form to send a scientific question, comment on a resource,
-                or enquire about a publication or digital tool presented on this site.
-            </p>
-        </div>
-
-        <div class="contact-form-box">
-            <h3>Scientific Enquiry</h3>
-
-            <form action="https://formspree.io/f/mrevgbpj" method="POST">
-                <div class="form-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" autocomplete="name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" autocomplete="email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="subject">Subject</label>
-                    <select id="subject" name="subject" required>
-                        <option value="">— Choose —</option>
-                        <option value="Scientific discussion">Scientific discussion</option>
-                        <option value="Publication or glossary">Publication or glossary</option>
-                        <option value="Digital tool">Digital tool</option>
-                        <option value="Scientific resource">Scientific resource</option>
-                        <option value="Collaboration">Collaboration</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required></textarea>
-                </div>
-
-                <button type="submit" class="btn-submit">Send Message →</button>
-                <p class="form-note">Your message will be sent through the contact form. Please do not include confidential or sensitive information.</p>
-            </form>
-        </div>
-    </div>
+    <form id="cf" action="https://formspree.io/f/mrevgbpj" method="POST">
+      <div class="fg"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
+      <div class="fg"><label for="email">Email</label><input id="email" type="email" name="email" autocomplete="email" required></div>
+      <div class="fg"><label for="subject">Type of request</label>
+        <select id="subject" name="subject" required>
+          <option value="">Choose…</option>
+          <option>Plant disease diagnostics</option>
+          <option>Viral metagenomics / sequencing</option>
+          <option>Statistics and epidemiology</option>
+          <option>Scientific writing and review</option>
+          <option>Training</option>
+          <option>Custom digital tool</option>
+          <option>Collaboration or other</option>
+        </select></div>
+      <div class="fg"><label for="message">Message</label><textarea id="message" name="message" required></textarea></div>
+      <input class="hp" type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="send" type="submit">Send message</button>
+      <p id="status" role="status"></p>
+      <p style="font-size:.74rem;color:var(--muted)">Please do not include confidential or sensitive data in this form.</p>
+    </form>
+  </div>
 </section>
 
 </main>
 
 <footer>
-    <div class="container footer-inner">
-        <div>
-            <span class="footer-logo">Plant Science Notes</span>
-            <p>
-                Digital resources in plant pathology, plant virology,
-                microbiology and bioinformatics.
-            </p>
-        </div>
-
-        <div class="footer-links">
-            <a href="#about">About</a>
-            <a href="#publications">Publications</a>
-            <a href="#tools">Digital Tools</a>
-            <a href="#bioinformatics">Bioinformatics</a>
-            <a href="#resources">Resources</a>
-            <a href="#contact">Contact</a>
-        </div>
-
-        <div class="footer-bottom">
-            <span>&copy; 2026 Plant Science Notes – Digital Resources</span>
-            <span>Personal scientific resource site</span>
-        </div>
-    </div>
+  <div class="wrap">
+    <span>© 2026 Plant Science Notes</span>
+    <span>Independent scientific resource and consulting site</span>
+  </div>
 </footer>
 
+<script>
+/* menu */
+const nav=document.getElementById('nav'),bg=document.getElementById('burger');
+bg.onclick=()=>{const o=nav.classList.toggle('open');bg.setAttribute('aria-expanded',o)};
+nav.addEventListener('click',e=>{if(e.target.tagName==='A')nav.classList.remove('open')});
+
+/* virus particle (icosahedron) */
+(function(){
+  const c=document.getElementById('virion'),x=c.getContext('2d');
+  const p=(1+Math.sqrt(5))/2,V=[];
+  [[0,1,p],[0,1,-p],[0,-1,p],[0,-1,-p],[1,p,0],[1,-p,0],[-1,p,0],[-1,-p,0],[p,0,1],[p,0,-1],[-p,0,1],[-p,0,-1]].forEach(v=>V.push(v));
+  const E=[];for(let i=0;i<12;i++)for(let j=i+1;j<12;j++){const d=Math.hypot(V[i][0]-V[j][0],V[i][1]-V[j][1],V[i][2]-V[j][2]);if(Math.abs(d-2)<.01)E.push([i,j])}
+  let w,h,ax=.4,ay=0,vx=0,vy=.004,drag=false,lx,ly;
+  const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function size(){const r=c.getBoundingClientRect(),d=devicePixelRatio||1;w=r.width;h=r.height;c.width=w*d;c.height=h*d;x.setTransform(d,0,0,d,0,0)}
+  function rot(v){let[a,b,z]=v;let c1=Math.cos(ay),s1=Math.sin(ay);let t=a*c1+z*s1;z=-a*s1+z*c1;a=t;c1=Math.cos(ax);s1=Math.sin(ax);t=b*c1-z*s1;z=b*s1+z*c1;return[a,t,z]}
+  function draw(){
+    x.clearRect(0,0,w,h);
+    const S=Math.min(w,h)*.2,cx=w/2,cy=h/2-10;
+    const P=V.map(v=>{const r=rot(v),k=3.5/(3.5-r[2]*.4);return{x:cx+r[0]*S*k,y:cy+r[1]*S*k,z:r[2]}});
+    E.forEach(([i,j])=>{const a=P[i],b=P[j],al=.25+.35*((a.z+b.z)/2+1.7)/3.4;x.strokeStyle='rgba(123,224,176,'+al+')';x.lineWidth=1;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke()});
+    /* capsomere dots along edges */
+    E.forEach(([i,j])=>{for(let t=.25;t<1;t+=.25){const a=P[i],b=P[j],z=a.z+(b.z-a.z)*t;x.fillStyle='rgba(123,224,176,'+(.3+.3*(z+1.7)/3.4)+')';x.beginPath();x.arc(a.x+(b.x-a.x)*t,a.y+(b.y-a.y)*t,1.6,0,7);x.fill()}});
+    P.forEach(q=>{x.fillStyle='#7be0b0';x.beginPath();x.arc(q.x,q.y,3.5+q.z*1.2,0,7);x.fill()});
+    /* RNA genome loop inside */
+    x.strokeStyle='rgba(91,120,255,.55)';x.lineWidth=1.4;x.beginPath();
+    for(let t=0;t<6.3;t+=.1){const r=rot([Math.cos(t*3)*.55,Math.sin(t*2)*.55,Math.sin(t*3)*.55]);x[t?'lineTo':'moveTo'](cx+r[0]*S,cy+r[1]*S)}
+    x.stroke();
+  }
+  function loop(){if(!drag&&!still){ay+=vy+vx;ax+=vx*.5;vx*=.95}draw();requestAnimationFrame(loop)}
+  c.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;c.setPointerCapture(e.pointerId);c.style.cursor='grabbing'});
+  c.addEventListener('pointermove',e=>{if(!drag)return;ay+=(e.clientX-lx)*.01;ax+=(e.clientY-ly)*.01;vx=(e.clientX-lx)*.0004;lx=e.clientX;ly=e.clientY});
+  c.addEventListener('pointerup',()=>{drag=false;c.style.cursor='grab'});
+  addEventListener('resize',size);size();loop();
+  /* scrolling sequence reads */
+  const rd=document.getElementById('reads');let s='';const B='ACGT';
+  for(let i=0;i<160;i++)s+=B[Math.random()*4|0];
+  let o=0;if(!still)setInterval(()=>{o=(o+1)%100;rd.textContent=s.slice(o,o+70)},120);else rd.textContent=s.slice(0,70);
+})();
+
+/* epidemic lab */
+(function(){
+  const $=id=>document.getElementById(id),svg=$('epi');
+  const T=60,W=640,H=340,m={l:46,r:14,t:14,b:38};
+  function f(model,r,y0,t){
+    if(model==='logistic')return 1/(1+((1-y0)/y0)*Math.exp(-r*t));
+    if(model==='gompertz')return Math.exp(Math.log(y0)*Math.exp(-r*t));
+    return 1-(1-y0)*Math.exp(-r*t);
+  }
+  function upd(){
+    const model=$('model').value,r=+$('rate').value,y0=+$('y0').value/100;
+    $('rv').textContent=r.toFixed(2);$('yv').textContent=(y0*100).toFixed(1).replace('.0','');
+    const X=t=>m.l+t/T*(W-m.l-m.r),Y=v=>H-m.b-v*(H-m.t-m.b);
+    let d='',aud=0,t50='>'+T,prev=null;
+    for(let t=0;t<=T;t+=.5){const v=f(model,r,y0,t);d+=(t?'L':'M')+X(t).toFixed(1)+' '+Y(v).toFixed(1);
+      if(prev!==null){aud+=(prev+v)/2*.5*100}
+      if(prev!==null&&prev<.5&&v>=.5&&t50.charAt(0)==='>')t50=t.toFixed(1);prev=v}
+    let g='';
+    for(let i=0;i<=4;i++){const v=i/4;g+=`<line x1="${m.l}" x2="${W-m.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="#d9e2dd"/><text x="${m.l-8}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="#56655e" font-family="IBM Plex Mono,monospace">${v*100}</text>`}
+    for(let t=0;t<=T;t+=10)g+=`<text x="${X(t)}" y="${H-m.b+18}" text-anchor="middle" font-size="11" fill="#56655e" font-family="IBM Plex Mono,monospace">${t}</text>`;
+    g+=`<text x="${W/2}" y="${H-4}" text-anchor="middle" font-size="12" fill="#56655e" font-family="Hanken Grotesk,sans-serif">Days after first symptoms</text>`;
+    g+=`<text transform="translate(12 ${H/2}) rotate(-90)" text-anchor="middle" font-size="12" fill="#56655e" font-family="Hanken Grotesk,sans-serif">Disease severity (%)</text>`;
+    svg.innerHTML=g+`<path d="${d} L${X(T)} ${Y(0)} L${X(0)} ${Y(0)}Z" fill="#1d7a52" fill-opacity=".1"/><path d="${d}" fill="none" stroke="#1d7a52" stroke-width="2.5"/>`;
+    $('audpc').textContent=aud.toFixed(0)+' %·days';$('t50').textContent=t50;
+  }
+  ['model','rate','y0'].forEach(id=>$(id).addEventListener('input',upd));upd();
+})();
+
+/* contact form (Formspree, no page reload) */
+(function(){
+  const f=document.getElementById('cf'),st=document.getElementById('status'),b=f.querySelector('.send');
+  f.addEventListener('submit',async e=>{
+    e.preventDefault();b.disabled=true;st.className='';st.textContent='Sending…';
+    try{
+      const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});
+      if(r.ok){f.reset();st.className='ok';st.textContent='Message sent. Thank you, I will reply by email soon.'}
+      else{const j=await r.json().catch(()=>({}));throw new Error((j.errors&&j.errors.map(x=>x.message).join(', '))||'Server error')}
+    }catch(err){st.className='err';st.textContent='The message could not be sent ('+err.message+'). Please try again in a moment.'}
+    b.disabled=false;
+  });
+})();
+</script>
 </body>
 </html>
